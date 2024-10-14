@@ -12,14 +12,13 @@ app.use(express.json());
 app.get('/', async (req, res) => {  
   const orders = await orderModel.find({});  
   return res.status(httpStatus.OK).json({
-    message: "Orders",
+    message: "Retrieved orders successfully",
     data: orders
   });  
 })
 
 app.get('/order/:id', async (req, res) => {
   const {id} = req.params;
-
   try{
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(httpStatus.NOT_FOUND).json({
@@ -38,50 +37,47 @@ app.get('/order/:id', async (req, res) => {
     });
   } catch(e){
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-      message: "Error while getting order by id." + e
+      message: `Error while getting order by id. Error: ${e}`
     })
   }
 })
 
 app.post('/order', async (req, res) => {
   const data = req.body;
-
   try{
     const createOrder = await orderModel.create(data);
-    
     return res.status(httpStatus.OK).json({
       message: "Order created successfully.",
       data: createOrder
     });
   }catch(e){
-    return res.status(httpStatus.BAD_REQUEST).json({
-      message: "Error while created a new order. " + e
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+      message: `Error while created a new order. Error: ${e}`
     })
   }   
 })
 
 app.put('/order/:id', async (req, res) => {
   const {id} = req.params;
-
   try{
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(httpStatus.NOT_FOUND).json({
         message: "Order ID is not valid."
       });
     }
-    const foundOrder = await orderModel.findByIdAndUpdate({_id: id }, req.body, {new: true});  
-    if(!foundOrder){
+    const updatedOrder = await orderModel.findByIdAndUpdate({_id: id }, req.body, {new: true}); 
+    if(!updatedOrder){
       return res.status(httpStatus.NOT_FOUND).json({
         message: "Order ID not found."
       });
     }
     return res.status(httpStatus.OK).json({
       message: "Order updated successfully.",
-      data: foundOrder
+      data: updatedOrder
     });
   }catch(e){
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-      message: "Error while edit order by ID." + e
+      message: `Error while updating order by ID. Error: ${e}`
     })
   }
 })
@@ -95,7 +91,6 @@ app.delete('/order/:id', async (req, res) => {
       });
     }    
     const foundOrder = await orderModel.findById(id);
-    
     if(!foundOrder){
       return res.status(httpStatus.NOT_FOUND).json({
         message: "Order ID not found."
@@ -103,12 +98,11 @@ app.delete('/order/:id', async (req, res) => {
     }
     await orderModel.deleteOne(foundOrder);    
     return res.status(httpStatus.OK).json({
-      message: "Order deleted successfully.",
-      data: foundOrder
+      message: "Order deleted successfully."
     }); 
   }catch(e){
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-      message: "Error while deleting order ID."
+      message: `Error while deleting order ID. Error: ${e}`
     })
   }
 })
@@ -118,6 +112,6 @@ app.listen(port, async () => {
       await mongoose.connect(process.env.DB_URL);
       console.log(`Listening at: http://localhost:${port}`);
     } catch(e){
-      console.log("Failed to connect. " + e);
+      console.log(`Failed to connect. Error: ${e}`);
     }
 });
