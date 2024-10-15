@@ -1,10 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const app = express();
-const port = 3000;
 const dotenv = require('dotenv');
 const orderModel = require('./order-model');
 const httpStatus = require('./http-status');
+
+const app = express();
+const port = 3000;
 
 dotenv.config();
 app.use(express.json());
