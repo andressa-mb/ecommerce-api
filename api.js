@@ -1,14 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const orderModel = require('./order-model');
+const orderModel = require('./src/features/orders/order.model');
 const httpStatus = require('./http-status');
+const orderRoutes = require('./src/features/orders/order.routes');
 
 const app = express();
 const port = 3000;
 
 dotenv.config();
 app.use(express.json());
+app.use('/orders', orderRoutes);
 
 app.get('/', async (req, res) => {  
   const orders = await orderModel.find({});  
@@ -41,21 +43,6 @@ app.get('/order/:id', async (req, res) => {
       message: `Error while getting order by id. Error: ${e}`
     })
   }
-})
-
-app.post('/order', async (req, res) => {
-  const data = req.body;
-  try{
-    const createOrder = await orderModel.create(data);
-    return res.status(httpStatus.OK).json({
-      message: "Order created successfully.",
-      data: createOrder
-    });
-  }catch(e){
-    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-      message: `Error while created a new order. Error: ${e}`
-    })
-  }   
 })
 
 app.put('/order/:id', async (req, res) => {
