@@ -12,39 +12,6 @@ dotenv.config();
 app.use(express.json());
 app.use('/orders', orderRoutes);
 
-app.get('/', async (req, res) => {  
-  const orders = await orderModel.find({});  
-  return res.status(httpStatus.OK).json({
-    message: "Retrieved orders successfully",
-    data: orders
-  });  
-})
-
-app.get('/order/:id', async (req, res) => {
-  const {id} = req.params;
-  try{
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(httpStatus.NOT_FOUND).json({
-        message: "Order ID is not valid."
-      });
-    }   
-    const foundOrder = await orderModel.findById(id);  
-    if(!foundOrder) {
-      return res.status(httpStatus.NOT_FOUND).json({
-        message: "Order ID not found."
-      });
-    }
-    return res.status(httpStatus.OK).json({
-      message: "Order ID found successfully.",
-      data: foundOrder
-    });
-  } catch(e){
-    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-      message: `Error while getting order by id. Error: ${e}`
-    })
-  }
-})
-
 app.put('/order/:id', async (req, res) => {
   const {id} = req.params;
   try{

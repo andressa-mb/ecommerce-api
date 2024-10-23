@@ -4,4 +4,12 @@ async function createOrder(body){
     return orderModel.create(body);
 }
 
-module.exports = { createOrder }
+async function findOrders(){
+    return orderModel.find({});
+}
+
+async function findById(id){
+    return orderModel.findOne({orderId: id});
+}
+
+module.exports = { createOrder, findOrders, findById }
