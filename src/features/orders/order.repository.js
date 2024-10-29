@@ -12,4 +12,8 @@ async function findById(id){
     return orderModel.findOne({orderId: id});
 }
 
-module.exports = { createOrder, findOrders, findById }
+async function updateOrder(id, body){
+    return orderModel.findOneAndUpdate({orderId: id}, body, {new: true});
+}
+
+module.exports = { createOrder, findOrders, findById, updateOrder }
