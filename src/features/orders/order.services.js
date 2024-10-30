@@ -12,4 +12,8 @@ async function findById(id){
     return repository.findById(id);
 }
 
-module.exports = { createOrder, getOrders, findById }
+async function updateOrder(id, body){
+    return repository.updateOrder(id, body);
+}
+
+module.exports = { createOrder, getOrders, findById, updateOrder }

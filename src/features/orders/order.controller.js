@@ -51,4 +51,25 @@ async function getOrderById(req, res){
     }
 }
 
-module.exports = { createOrder, getOrders, getOrderById }
+async function updateOrder(req, res){
+    const {id} = req.params;
+    try{
+        
+        const updateOrder = await orderService.updateOrder(id, req.body);
+        if(!updateOrder){
+            return res.status(httpStatus.NOT_FOUND).json({
+                message: "Order ID not found to updated."
+            });
+        }
+        return res.status(httpStatus.OK).json({
+            message: "Order ID updated.",
+            data: updateOrder
+        });
+    }catch(e){
+        return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+            message: `Error while getting order ID to updated. Error: ${e}`
+        })
+    }
+}
+
+module.exports = { createOrder, getOrders, getOrderById, updateOrder }
