@@ -12,31 +12,6 @@ dotenv.config();
 app.use(express.json());
 app.use('/orders', orderRoutes);
 
-app.delete('/order/:id', async (req, res) => {
-  const {id} = req.params;
-  try{
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(httpStatus.NOT_FOUND).json({
-        message: "Order ID not found."
-      });
-    }    
-    const foundOrder = await orderModel.findById(id);
-    if(!foundOrder){
-      return res.status(httpStatus.NOT_FOUND).json({
-        message: "Order ID not found."
-      });
-    }
-    await orderModel.deleteOne(foundOrder);    
-    return res.status(httpStatus.OK).json({
-      message: "Order deleted successfully."
-    }); 
-  }catch(e){
-    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-      message: `Error while deleting order ID. Error: ${e}`
-    })
-  }
-})
-
 app.listen(port, async () => {
     try{
       await mongoose.connect(process.env.DB_URL);

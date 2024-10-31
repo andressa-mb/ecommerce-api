@@ -16,4 +16,8 @@ async function updateOrder(id, body){
     return repository.updateOrder(id, body);
 }
 
-module.exports = { createOrder, getOrders, findById, updateOrder }
+async function deleteOrder(id){
+	return repository.deleteOrder(id);
+}
+
+module.exports = { createOrder, getOrders, findById, updateOrder, deleteOrder }

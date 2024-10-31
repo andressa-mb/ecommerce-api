@@ -72,4 +72,22 @@ async function updateOrder(req, res){
     }
 }
 
-module.exports = { createOrder, getOrders, getOrderById, updateOrder }
+async function deleteOrder(req, res){
+	const {id} = req.params;
+	try{
+		const deleteOrder = await orderService.deleteOrder(id);
+		if(!deleteOrder){
+			return res.status(httpStatus.NOT_FOUND).json({
+				message: "Order ID not found."
+			});
+		}
+		return res.status(httpStatus.OK).json({
+			message: "Order deleted successfully."
+		});
+	}catch(e){
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+      message: `Error while deleting order ID. Error: ${e}`
+    })
+  }
+
+module.exports = { createOrder, getOrders, getOrderById, updateOrder, deleteOrder }
