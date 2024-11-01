@@ -5,6 +5,7 @@ async function createOrder(body){
 }
 
 async function getOrders(){
+    console.log("Passou na service");
     return repository.findOrders();
 }
 

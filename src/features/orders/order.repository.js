@@ -5,6 +5,7 @@ async function createOrder(body){
 }
 
 async function findOrders(){
+    console.log("passou no repository");
     return orderModel.find({});
 }
 
