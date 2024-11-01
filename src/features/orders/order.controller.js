@@ -89,5 +89,6 @@ async function deleteOrder(req, res){
       message: `Error while deleting order ID. Error: ${e}`
     })
   }
+}
 
 module.exports = { createOrder, getOrders, getOrderById, updateOrder, deleteOrder }
