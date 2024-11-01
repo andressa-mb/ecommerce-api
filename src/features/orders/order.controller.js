@@ -21,6 +21,7 @@ async function getOrders(req, res){
     try{
         console.log("Passou no controller");
         const getOrders = await orderService.getOrders();
+        console.log(`ORDERS: ${getOrders}`);
         return res.status(httpStatus.OK).json({
           message: "Retrieved orders successfully",
           data: getOrders
