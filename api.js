@@ -12,6 +12,12 @@ dotenv.config();
 app.use(express.json());
 app.use('/orders', orderRoutes);
 
+app.get('/ping', (req, res) => {
+  return res.status(200).json({
+    message: "pong"
+  })
+})
+
 app.listen(port, async () => {
     try{
       await mongoose.connect(process.env.DB_URL);
