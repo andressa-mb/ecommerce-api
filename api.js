@@ -4,7 +4,6 @@ const dotenv = require('dotenv');
 const orderModel = require('./src/features/orders/order.model');
 const httpStatus = require('./http-status');
 const orderRoutes = require('./src/features/orders/order.routes');
-const DBMONGO = "mongodb+srv://vercel-admin-user:6okyPLrvzFSFzLVd@order.lr7fy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 const app = express();
 const port = 3000;
@@ -23,7 +22,7 @@ app.get('/ping', (req, res) => {
 app.listen(port, async () => {
     try{
       //await mongoose.connect(process.env.DB_URL);
-      await mongoose.connect(process.env.DBMONGO);
+      await mongoose.connect(process.env.MONGODB_URI);
       console.log(`Listening at: http://localhost:${port}`);
     } catch(e){
       console.log(`Failed to connect. Error: ${e}`);
