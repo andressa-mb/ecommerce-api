@@ -1,8 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const orderModel = require('./src/features/orders/order.model');
-const httpStatus = require('./http-status');
 const orderRoutes = require('./src/features/orders/order.routes');
 
 const app = express();
@@ -21,8 +19,7 @@ app.get('/ping', (req, res) => {
 
 app.listen(port, async () => {
     try{
-      //await mongoose.connect(process.env.DB_URL);
-      await mongoose.connect(process.env.MONGODB_URI);
+      await mongoose.connect(process.env.DB_URL);
       console.log(`Listening at: http://localhost:${port}`);
     } catch(e){
       console.log(`Failed to connect. Error: ${e}`);
