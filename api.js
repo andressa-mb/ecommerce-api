@@ -19,7 +19,7 @@ app.get('/ping', (req, res) => {
 
 app.listen(port, async () => {
     try{
-      await mongoose.connect(process.env.DB_URL);
+      await mongoose.connect(process.env.MONGODB_URI);
       console.log(`Listening at: http://localhost:${port}`);
     } catch(e){
       console.log(`Failed to connect. Error: ${e}`);
