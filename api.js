@@ -17,6 +17,10 @@ app.use(helmet.contentSecurityPolice({
       styleSrc: ["'self'"],
     },
 }));
+app.use(helmet.cookie({
+  secure: true,
+  sameSite: 'none',
+}));
 
 app.get('/ping', (req, res) => {
   console.log("ping");
