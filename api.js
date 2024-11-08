@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const helmet = require('helmet');
 const orderRoutes = require('./src/features/orders/order.routes');
 
 const app = express();
@@ -9,6 +10,13 @@ const port = 3000;
 dotenv.config();
 app.use(express.json());
 app.use('/orders', orderRoutes);
+app.use(helmet.contentSecurityPolice({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "/api.js"],
+      styleSrc: ["'self'"],
+    },
+}));
 
 app.get('/ping', (req, res) => {
   console.log("ping");

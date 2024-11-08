@@ -11,16 +11,5 @@
             "src": "/(.*)",
             "dest": "api.js"
         }
-    ],
-    "headers": [
-        {
-            "source": "/",
-            "headers": [
-                {
-                    "key": "Content-Security-Policy",
-                    "value": "default-src 'self'; script-src 'self' /api.js; style-src 'self'"
-                }
-            ]
-        }
     ]
 }
