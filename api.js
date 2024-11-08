@@ -10,16 +10,24 @@ const port = 3000;
 dotenv.config();
 app.use(express.json());
 app.use('/orders', orderRoutes);
+
+// Configuração do cookie específica para __vercel_live_token
+app.use((req, res, next) => {
+  res.cookie("_vercel_live_token", req.cookies._vercel_live_token, {
+  secure: true,
+  sameSite: 'none',
+  httpOnly: true,
+  });
+  next();
+  });
+  
+// Configuração geral de segurança com helmet
 app.use(helmet.contentSecurityPolice({
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "/api.js"],
       styleSrc: ["'self'"],
     },
-}));
-app.use(helmet.cookie({
-  secure: true,
-  sameSite: 'none',
 }));
 
 app.get('/ping', (req, res) => {
