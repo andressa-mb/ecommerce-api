@@ -11,12 +11,5 @@
             "src": "/(.*)",
             "dest": "api.js"
         }
-    ],
-    "cookies": [
-        {
-          "name": "__vercel_live_token",
-          "sameSite": "none",
-          "secure": true
-        }
     ]
 }
