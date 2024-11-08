@@ -20,7 +20,7 @@ async function createOrder(req, res){
 async function getOrders(req, res){
     try{
         console.log("Passou no controller");
-        const getOrders = await orderService.find({});
+        const getOrders = await orderService.getOrders({});
         console.log("mostra as orders: ");
         console.log(`ORDERS: ${getOrders}`);
         return res.status(httpStatus.OK).json({
