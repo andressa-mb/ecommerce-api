@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const helmet = require('helmet');
 const orderRoutes = require('./src/features/orders/order.routes');
+const orderModel = require('./src/features/orders/order.model');
 
 const app = express();
 const port = 3000;
