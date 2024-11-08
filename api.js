@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 app.use(helmet.contentSecurityPolicy({
   directives: {
     defaultSrc: ["'self'"],
-    scriptSrc: ["'self'", "/api.js"],
+    scriptSrc: ["'self'", "api.js"],
     styleSrc: ["'self'"],
     imgSrc: ["'self'", "*"],
   },
