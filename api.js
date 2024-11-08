@@ -32,7 +32,7 @@ app.get('/ping', (req, res) => {
 
 app.get('/test-query', async (req, res) => {
   try {
-    const orders = await orderModel.find();
+    const orders = await orderModel.find().limit(10).exec();
     console.log(orders);
     res.status(200).json(orders);
   } catch (err) {
