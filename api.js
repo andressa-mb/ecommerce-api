@@ -22,7 +22,7 @@ app.use((req, res, next) => {
   });
   
 // Configuração geral de segurança com helmet
-app.use(helmet.contentSecurityPolice({
+app.use(helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "/api.js"],
