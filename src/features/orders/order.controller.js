@@ -1,7 +1,6 @@
 const httpStatus = require('../../../http-status');
 const mongoose = require('mongoose');
 const orderService = require('./order.services');
-const orderModel = require('./order.model');
 
 async function createOrder(req, res){
     const data = req.body;
@@ -21,7 +20,8 @@ async function createOrder(req, res){
 async function getOrders(req, res){
     try{
         console.log("Passou no controller");
-        const getOrders = await orderModel.find({});
+        const getOrders = await orderService.find({});
+        console.log("mostra as orders: ");
         console.log(`ORDERS: ${getOrders}`);
         return res.status(httpStatus.OK).json({
           message: "Retrieved orders successfully",

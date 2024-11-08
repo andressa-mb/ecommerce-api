@@ -11,12 +11,6 @@ dotenv.config();
 app.use(express.json());
 app.use('/orders', orderRoutes);
 
-// Configuração do cabeçalho Set-Cookie
-app.use((req, res, next) => {
-  res.setHeader('Set-Cookie', '__vercel_live_token=; SameSite=None; Secure; Path=/');
-  next();
-});
-
 // Configuração geral de segurança com helmet
 app.use(helmet.contentSecurityPolicy({
   directives: {
@@ -37,6 +31,7 @@ app.get('/ping', (req, res) => {
 app.listen(port, async () => {
     try{
       await mongoose.connect(process.env.MONGODB_URI);
+      console.log(`Conexão com MongoDB estabelecida!`);
       console.log(`Listening at: http://localhost:${port}`);
     } catch(e){
       console.log(`Failed to connect. Error: ${e}`);
