@@ -29,14 +29,14 @@ app.get('/ping', (req, res) => {
 })
 
 
-app.get('/test-connection', async (req, res) => {
+app.get('/test-query', async (req, res) => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
-    console.log('Conexão estabelecida!');
-    res.status(200).json({ message: 'Conexão estabelecida!' });
+    const orders = await orderModel.find();
+    console.log(orders);
+    res.status(200).json(orders);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Erro de conexão!' });
+    res.status(500).json({ message: 'Erro de consulta!' });
   }
 });
 

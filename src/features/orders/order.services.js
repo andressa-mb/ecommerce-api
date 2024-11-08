@@ -5,8 +5,13 @@ async function createOrder(body){
 }
 
 async function getOrders(){
-    console.log("Passou na service");
-    return repository.findOrders();
+    try{
+        console.log("Passou na service");
+        return repository.findOrders();
+    } catch(e){
+        console.error(`Erro no service ${e}`);
+    }
+
 }
 
 async function findById(id){
