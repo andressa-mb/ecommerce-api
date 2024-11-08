@@ -5,12 +5,21 @@ async function createOrder(body){
 }
 
 async function getOrders(){
-    try{
+    console.log('Service: Buscando orders...');
+    try {
+      const orders = await repository.findOrders();
+      console.log('Service: Orders encontrados:', orders);
+      return orders;
+    } catch (err) {
+      console.error('Service: Erro ao buscar orders:', err);
+      throw err;
+    }
+/*     try{
         console.log("Passou na service");
         return repository.findOrders();
     } catch(e){
         console.error(`Erro no service ${e}`);
-    }
+    } */
 
 }
 
