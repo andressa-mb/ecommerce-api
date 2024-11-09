@@ -13,14 +13,14 @@ app.use(express.json());
 app.use('/orders', orderRoutes);
 
 // Configuração geral de segurança com helmet
-app.use(helmet.contentSecurityPolicy({
+/* app.use(helmet.contentSecurityPolicy({
   directives: {
     defaultSrc: ["'self'"],
     scriptSrc: ["'self'", "api.js"],
     styleSrc: ["'self'"],
     imgSrc: ["'self'", "*"],
   },
-}));
+})); */
 
 app.get('/ping', (req, res) => {
   console.log("ping");

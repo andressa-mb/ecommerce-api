@@ -1,5 +1,4 @@
 const httpStatus = require('../../../http-status');
-const mongoose = require('mongoose');
 const orderService = require('./order.services');
 
 async function createOrder(req, res){
