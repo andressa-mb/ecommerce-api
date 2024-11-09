@@ -43,7 +43,7 @@ app.get('/test-query', async (req, res) => {
 
 app.listen(port, async () => {
     try{
-      await mongoose.connect(process.env.MONGODB_URI);
+      await mongoose.connect(process.env.DB_URL);
       console.log(`Conexão com MongoDB estabelecida!`);
       console.log(`Listening at: http://localhost:${port}`);
     } catch(e){
