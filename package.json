@@ -2,9 +2,9 @@
   "name": "ecommerce-api",
   "version": "1.0.0",
   "description": "",
-  "main": "api.js",
+  "main": "./api/api.js",
   "scripts": {
-    "dev": "nodemon api.js"
+    "dev": "nodemon ./api/api.js"
   },
   "keywords": [],
   "author": "",
