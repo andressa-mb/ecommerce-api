@@ -11,7 +11,6 @@ const port = 3000;
 dotenv.config();
 app.use(express.json());
 app.use(cors());
-app.use('/test-orders', orderRoutes);
 app.use('/orders', orderRoutes);
 
 // Configuração geral de segurança com helmet
@@ -30,16 +29,6 @@ app.get('/ping', (req, res) => {
     message: "pong"
   })
 })
-
-app.use('/orders', (req, res, next) => {
-  console.log("Rota /orders foi chamada");
-  next();
-}, orderRoutes);
-
-app.get('/test', (req, res) => {
-  console.log("Rota /test foi chamada");
-  res.json({ message: "Rota de teste funcionando!" });
-});
 /*
 app.listen(port, async () => {
     try{
