@@ -1,12 +1,11 @@
 {
     "version": 2,
-    "env": {
-    "DB_URL": "mongodb+srv://ecommerceOrder:ecommerce@order.kb4zj.mongodb.net/order?retryWrites=true&w=majority&appName=order"
-    },
+
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "api.js"
+            "dest": "/api/api.js"
         }
     ]
 }
+
