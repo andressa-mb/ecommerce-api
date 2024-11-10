@@ -43,6 +43,16 @@ app.get('/test-query', async (req, res) => {
   }
 });
 
+app.get('/test-connection', async (req, res) => {
+  try {
+    await mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+    res.status(200).json({ message: 'Conexão bem-sucedida com o MongoDB!' });
+  } catch (error) {
+    console.error('Erro ao conectar:', error);
+    res.status(500).json({ message: 'Erro de conexão', error });
+  }
+});
+
 app.listen(port, async () => {
     try{
       await mongoose.connect(process.env.DB_URL, {
