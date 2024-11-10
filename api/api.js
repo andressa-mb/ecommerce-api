@@ -35,6 +35,9 @@ app.get('/orders', (req, res) => {
   res.status(200).json({ message: 'Rota /orders acessível!' });
 });
 
+app.get('/check-env', (req, res) => {
+  res.status(200).json({ dbUrl: process.env.DB_URL || "Variable not set" });
+});
 
 app.get('/test-query', async (req, res) => {
   try {
