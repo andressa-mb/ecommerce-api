@@ -12,7 +12,7 @@ const port = 3000;
 dotenv.config();
 app.use(express.json());
 app.use(cors());
-app.use('/orders', orderRoutes);
+//app.use('/orders', orderRoutes);
 
 // Configuração geral de segurança com helmet
 /* app.use(helmet.contentSecurityPolicy({

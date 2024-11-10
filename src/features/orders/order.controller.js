@@ -20,10 +20,10 @@ async function createOrder(req, res){
 async function getOrders(req, res){
     console.log('Controller: Buscando orders...');
     try {
-        const orders = await orderModel.find().limit(5);
-      //const getOrders = await orderService.getOrders();
-      console.log('controller, achou direto no model' + orders);
-      //console.log('Controller: Orders encontrados:', getOrders);
+       // const orders = await orderModel.find().limit(5);
+      const getOrders = await orderService.getOrders();
+      //console.log('controller, achou direto no model' + orders);
+      console.log('Controller: Orders encontrados:', getOrders);
       res.json(getOrders);
     } catch (err) {
       console.error('Controller: Erro ao buscar orders:', err);
