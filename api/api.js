@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const cors = require('cors');
+//const cors = require('cors');
 //const helmet = require('helmet');
 const orderRoutes = require('../src/features/orders/order.routes');
 
@@ -10,7 +10,7 @@ const port = 3000;
 
 dotenv.config();
 app.use(express.json());
-app.use(cors());
+//app.use(cors());
 app.use('/orders', orderRoutes);
 
 // Configuração geral de segurança com helmet
