@@ -11,6 +11,7 @@ const port = 3000;
 dotenv.config();
 app.use(express.json());
 app.use(cors());
+app.use('/test-orders', orderRoutes);
 app.use('/orders', orderRoutes);
 
 // Configuração geral de segurança com helmet
@@ -35,6 +36,11 @@ app.use('/orders', (req, res, next) => {
   next();
 }, orderRoutes);
 
+app.get('/test', (req, res) => {
+  console.log("Rota /test foi chamada");
+  res.json({ message: "Rota de teste funcionando!" });
+});
+/*
 app.listen(port, async () => {
     try{
       await mongoose.connect(process.env.DB_URL, {
@@ -47,3 +53,21 @@ app.listen(port, async () => {
       console.log(`Failed to connect. Error: ${e}`);
     }
 });
+*/
+async function startServer() {
+  try {
+    await mongoose.connect(process.env.DB_URL, {
+      serverSelectionTimeoutMS: 5000, // tenta conectar por até 5 segundos antes de dar erro
+      connectTimeoutMS: 10000, // tenta a conexão por até 10 segundos
+    });
+    console.log('Conexão com MongoDB estabelecida!');
+    
+    app.listen(port, () => {
+      console.log(`Servidor escutando na porta ${port}`);
+    });
+  } catch (err) {
+    console.error('Erro ao conectar com MongoDB:', err);
+  }
+}
+
+startServer();
