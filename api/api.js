@@ -31,6 +31,10 @@ app.get('/ping', (req, res) => {
   })
 })
 
+app.get('/orders', (req, res) => {
+  res.status(200).json({ message: 'Rota /orders acessível!' });
+});
+
 
 app.get('/test-query', async (req, res) => {
   try {
