@@ -1,6 +1,6 @@
 const httpStatus = require('../../../http-status');
-const mongoose = require('mongoose');
 const orderService = require('./order.services');
+const orderModel = require('./order.model');
 
 async function createOrder(req, res){
     const data = req.body;
@@ -18,16 +18,11 @@ async function createOrder(req, res){
 }
 
 async function getOrders(req, res){
-    try{
-        const getOrders = await orderService.getOrders();
-        res.status(httpStatus.OK).json({
-          message: "Retrieved orders successfully",
-          data: getOrders
-        });
-    }catch(e){
-        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-            message: `Error to get orders + ${e}`
-        })
+    try {
+      const getOrders = await orderService.getOrders();
+      res.json(getOrders);
+    } catch (err) {
+      res.status(500).json({ message: 'Erro ao buscar orders' });
     }
 }
 
@@ -89,5 +84,6 @@ async function deleteOrder(req, res){
       message: `Error while deleting order ID. Error: ${e}`
     })
   }
+}
 
 module.exports = { createOrder, getOrders, getOrderById, updateOrder, deleteOrder }
