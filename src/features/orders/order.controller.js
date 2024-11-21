@@ -18,33 +18,12 @@ async function createOrder(req, res){
 }
 
 async function getOrders(req, res){
-    console.log('Controller: Buscando orders...');
     try {
-       // const orders = await orderModel.find().limit(5);
       const getOrders = await orderService.getOrders();
-      //console.log('controller, achou direto no model' + orders);
-      console.log('Controller: Orders encontrados:', getOrders);
       res.json(getOrders);
     } catch (err) {
-      console.error('Controller: Erro ao buscar orders:', err);
       res.status(500).json({ message: 'Erro ao buscar orders' });
     }
-    //
-/*     try{
-        console.log("Passou no controller");
-        const getOrders = await orderService.getOrders({});
-        console.log("mostra as orders: ");
-        console.log(`ORDERS: ${getOrders}`);
-        return res.status(httpStatus.OK).json({
-          message: "Retrieved orders successfully",
-          data: getOrders
-        }); */
-/*     }catch(e){
-        console.error(e);
-        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-            message: `Error to get orders + ${e}`
-        })
-    } */
 }
 
 async function getOrderById(req, res){

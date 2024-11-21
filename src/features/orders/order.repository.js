@@ -5,22 +5,7 @@ async function createOrder(body){
 }
 
 async function findOrders(){
-    console.log('Repository: Buscando orders...');
-    try {
-      const orders = await orderModel.find();
-      console.log('Repository: Orders encontrados:', orders);
-      return orders;
-    } catch (err) {
-      console.error('Repository: Erro ao buscar orders:', err);
-      throw err;
-    }
-/*     try{
-        console.log("passou no repository");
-        return orderModel.find({});
-    }catch(e){
-        console.error(e);
-    } */
-
+    return orderModel.find();
 }
 
 async function findById(id){
