@@ -10,7 +10,7 @@ dotenv.config();
 app.use(express.json());
 app.use('/orders', orderRoutes);
 
-app.post('/', (req, res) => {
+app.get('/', (req, res) => {
   res.send("Requisição teste recebida no modo stage");
 });
 
