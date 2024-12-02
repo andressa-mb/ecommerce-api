@@ -10,6 +10,10 @@ dotenv.config();
 app.use(express.json());
 app.use('/orders', orderRoutes);
 
+app.post('/', (req, res) => {
+  res.send("Requisição teste recebida no modo stage");
+});
+
 async function startServer() {
   try {
     await mongoose.connect(process.env.DB_URL, {
