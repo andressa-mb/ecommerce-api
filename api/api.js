@@ -14,6 +14,10 @@ app.get('/', (req, res) => {
   res.send("Requisição teste recebida no modo stage");
 });
 
+app.get('/teste', (req, res) => {
+  res.send("Requisição teste de atualização");
+});
+
 async function startServer() {
   try {
     await mongoose.connect(process.env.DB_URL, {
