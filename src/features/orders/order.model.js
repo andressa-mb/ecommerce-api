@@ -7,7 +7,10 @@ const orderSchema = new Schema({
             required: true,
             unique: true
         },
-        orderDate: Date,
+        orderDate: {
+            type: Date,
+            default: Date.now()
+        },
         orderStatus: {
             type: String,
             enum: ['OPEN', 'PAYED', 'FINISH'],

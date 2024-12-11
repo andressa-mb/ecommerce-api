@@ -5,7 +5,7 @@ async function createOrder(body){
 }
 
 async function findOrders(){
-    return orderModel.find({});
+    return orderModel.find();
 }
 
 async function findById(id){
