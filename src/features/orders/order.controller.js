@@ -1,6 +1,5 @@
 const httpStatus = require('../../../http-status');
 const orderService = require('./order.services');
-const orderModel = require('./order.model');
 
 async function createOrder(req, res){
     const data = req.body;
@@ -22,7 +21,7 @@ async function getOrders(req, res){
       const getOrders = await orderService.getOrders();
       res.json(getOrders);
     } catch (err) {
-      res.status(500).json({ message: 'Erro ao buscar orders' });
+      res.status(500).json({ message: `Erro ao buscar orders. Error: ${err}`});
     }
 }
 
