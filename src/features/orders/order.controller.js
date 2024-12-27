@@ -21,7 +21,7 @@ async function getOrders(req, res){
       const getOrders = await orderService.getOrders();
       res.json(getOrders);
     } catch (err) {
-      res.status(500).json({ message: `Erro ao buscar orders. Error: ${err}`});
+      res.status(500).json({ message: `Error to get orders. Error: ${err}`});
     }
 }
 

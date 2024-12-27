@@ -13,20 +13,19 @@ app.use('/orders', orderRoutes);
 async function startServer() {
   try {
         await mongoose.connect(process.env.MONGODB_URI, {
-        serverSelectionTimeoutMS: 5000, // tenta conectar com o servidor por até 5 segundos
-        connectTimeoutMS: 10000, // tenta a conexão por até 10 segundos
+        serverSelectionTimeoutMS: 5000,
+        connectTimeoutMS: 10000,
       });
-      console.log('Conexão com MongoDB estabelecida!'); 
+      console.log('Conection succeeded with MongoDB!'); 
       
       await app.listen(port, () => {
-        console.log(`Servidor escutando na porta ${port}`);
+        console.log(`Server listening port: ${port}`);
       });     
   } catch (err) {
-    console.error('Erro ao conectar com MongoDB:', err);
+    console.error('Error to connect to MongoDB:', err);
   }
 }
 
 startServer();
-console.log("ESTOU NA API");
 
 module.exports = app;
