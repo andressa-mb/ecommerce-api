@@ -116,7 +116,7 @@ describe("Orders API Endpoints", () => {
       expect(repository.findOrders).toHaveBeenCalledTimes(1);
     });
 
-    it("It must return an error to access orders", async () => {
+    it("It must return an internal server error to access orders", async () => {
       repository.findOrders.mockRejectedValue(
         new Error("Error to get orders.")
       );
@@ -166,7 +166,7 @@ describe("Orders API Endpoints", () => {
       expect(repository.createOrder).toHaveBeenCalledTimes(1);
     });
 
-    it("It must return an error to create a order", async () => {
+    it("It must return an internal server error to create a order", async () => {
       repository.createOrder.mockRejectedValue(
         new Error("Error while created a new order.")
       );
