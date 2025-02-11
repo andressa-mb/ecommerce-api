@@ -6,6 +6,7 @@ const repository = require("../src/features/orders/order.repository");
 jest.mock("../src/features/orders/order.repository", () => ({
   findOrders: jest.fn(),
   createOrder: jest.fn(),
+  updateOrder: jest.fn(),
 }));
 
 jest.mock("mongoose", () => {
@@ -166,7 +167,7 @@ describe("Orders API Endpoints", () => {
       expect(repository.createOrder).toHaveBeenCalledTimes(1);
     });
 
-    it("It must return an internal server error to create a order", async () => {
+    it("It must return an internal server error to create an order", async () => {
       repository.createOrder.mockRejectedValue(
         new Error("Error while created a new order.")
       );
@@ -177,6 +178,41 @@ describe("Orders API Endpoints", () => {
         message: expect.stringContaining("Error while created a new order."),
       });
       expect(repository.createOrder).toHaveBeenCalledTimes(1);
+    });
+  });
+});
+
+describe("UPDATE /orders/:id", () => {
+  it("It must update the order by id", async () => {
+    const mockOrderId = 5;
+    const mockUpdateData = { paymentMethod: "CASH" };
+
+    const updatedOrder = { orderId: mockOrderId, ...mockUpdateData };
+    repository.updateOrder.mockResolvedValue(updatedOrder);
+    const res = await request(app)
+      .put(`/orders/${mockOrderId}`)
+      .send(mockUpdateData);
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.message).toBe("Order ID updated.");
+    expect(res.body.data).toEqual(updatedOrder);
+  });
+
+  it("It must return an internal server error to update an order", async () => {
+    const mockOrderId = 5;
+    const mockUpdateData = { paymentMethod: "CASH" };
+    repository.updateOrder.mockRejectedValue(
+      new Error("Error while updated an order.")
+    );
+
+    const res = await request(app)
+      .put(`/orders/${mockOrderId}`)
+      .send(mockUpdateData);
+    expect(res.statusCode).toBe(500);
+    expect(res.body).toMatchObject({
+      message: expect.stringContaining(
+        "Error while getting order ID to updated."
+      ),
     });
   });
 });
