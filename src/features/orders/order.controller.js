@@ -4,14 +4,14 @@ const orderService = require("./order.services");
 async function createOrder(req, res) {
   const data = req.body;
   try {
-    const createOrder = await orderService.createOrder(data);
+    const createdOrder = await orderService.createOrder(data);
     res.status(httpStatus.CREATED).json({
       message: "Order created successfully.",
-      data: createOrder,
+      data: createdOrder,
     });
   } catch (e) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-      message: `Error while created a new order. Error: ${e}`,
+      message: `Error while creating a new order. Error: ${e}`,
     });
   }
 }
@@ -21,7 +21,7 @@ async function getOrders(req, res) {
     const getOrders = await orderService.getOrders();
     res.json(getOrders);
   } catch (err) {
-    res.status(500).json({ message: `Error to get orders. Error: ${err}` });
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: `Error to get orders. Error: ${err}` });
   }
 }
 
@@ -60,7 +60,7 @@ async function updateOrder(req, res) {
     });
   } catch (e) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-      message: `Error while getting order ID to updated. Error: ${e}`,
+      message: `Error to updated order ID ${id}. Error: ${e}`,
     });
   }
 }

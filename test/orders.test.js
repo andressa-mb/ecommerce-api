@@ -202,7 +202,7 @@ describe("UPDATE /orders/:id", () => {
     const mockOrderId = 5;
     const mockUpdateData = { paymentMethod: "CASH" };
     repository.updateOrder.mockRejectedValue(
-      new Error("Error while updated an order.")
+      new Error("Error while updating an order.")
     );
 
     const res = await request(app)
@@ -211,7 +211,7 @@ describe("UPDATE /orders/:id", () => {
     expect(res.statusCode).toBe(500);
     expect(res.body).toMatchObject({
       message: expect.stringContaining(
-        "Error while getting order ID to updated."
+        `Error to updated order ID ${mockOrderId}`
       ),
     });
   });
