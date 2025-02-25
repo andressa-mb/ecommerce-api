@@ -51,16 +51,16 @@ async function updateOrder(req, res) {
     const updateOrder = await orderService.updateOrder(id, req.body);
     if (!updateOrder) {
       return res.status(httpStatus.NOT_FOUND).json({
-        message: "Order ID not found to updated.",
+        message: "Error while updating order.",
       });
     }
     return res.status(httpStatus.OK).json({
-      message: "Order ID updated.",
+      message: "Order Updated Successfully.",
       data: updateOrder,
     });
   } catch (e) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-      message: `Error to updated order ID ${id}. Error: ${e}`,
+      message: `Error updating order. Error: ${e}`,
     });
   }
 }
